@@ -190,3 +190,10 @@ resource "aws_iam_role_policy" "aws_load_balancer_controller_policy" {
 
 EOF
 }
+
+resource "aws_iam_role_policy_attachment" "eks_nodegroup_ebs_csi_policy_attachment" {
+  for_each = toset(keys(module.eks.eks_managed_node_groups))
+
+  role       = module.eks.eks_managed_node_groups[each.key].iam_role_name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+}

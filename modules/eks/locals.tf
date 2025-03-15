@@ -43,6 +43,7 @@ locals {
         env = nodegroup.custom_label != null ? "${var.environment}-${nodegroup.custom_label}" : var.environment
         type = nodegroup.type
         capacity_type = nodegroup.is_spot ? "spot" : "ondemand"
+
       }
     }
   }
